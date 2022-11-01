@@ -1,39 +1,66 @@
-.App {
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #6190e7, #4d50e7);
+  font-family: sans-serif;
+  font-weight: 100;
+  user-select: none;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border:solid;
+}
+
+th {
+  text-align: left;
+}
+
+thead>tr>th {
+  background-color: #55608f;
+}
+
+
+tbody>tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.tableDelete, .tableDetails {
+  font-size: large;
+  background-color: rgb(192, 85, 85);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tableDetails {
+  background-color: rgb(89, 53, 219);
+}
+
+form {
+  width: 100%;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
 }
