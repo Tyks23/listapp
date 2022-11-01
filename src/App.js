@@ -1,56 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import axios from 'axios';
+import { React ,useState, useRef } from 'react'
 import './App.css';
+import ListComponent from './components/ListComponent';
+
+
+function getItemsFromWeb(){
+  axios.get('https://my.api.mockaroo.com/shipments.json?key=5e0b62d0')
+  .then(function (response) {
+    // handle success
+    return response.data;
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+}
+
+async function getItemsFromText(){
+  await fetch('/Shipments.txt')
+    .then((r) => r.text())
+    .then(text  => {   
+      return JSON.parse(text);
+    })  
+}
+
 
 function App() {
+
+  const [listItems, setListItems] = useState([]);
+  const [show, setShow] = useState(true);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <button onClick={async () => {
+        console.log(listItems);
+        setListItems(getItemsFromText)
+        console.log(listItems)}}>test</button>
+
+<button onClick={async () => {console.log(listItems); setShow(!show)}}>test2</button>
+
+      {show ? <p>nothing here</p> : listItems.map(({ orderNo, date, customer, consignee, status, trackingNo }) => 
+      <ListComponent key={orderNo} 
+      orderNo={orderNo} 
+      date={date}
+      customer={customer}
+      consignee={consignee}
+      status={status}
+      trackingNo={trackingNo}/>, [])}
     </div>
   );
 }
